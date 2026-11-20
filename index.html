@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>Beyond Credit Hours: Employer Demand, Accreditation, and AI in a 90-Credit Construction Management Degree</title>
+<meta name="description" content="Atlases of construction bachelor’s degrees in the United States, the United Kingdom, Hong Kong and Australia, the general education and accreditation requirements that shape a 90-credit degree, and job postings read from employers’ career sites, each with its source.">
+<link rel="icon" href="data:,">
+<link rel="preload" href="data/study.json?v=21" as="fetch" crossorigin>
+<link rel="preload" href="data/atlas.json?v=21" as="fetch" crossorigin>
+<link rel="preload" href="data/states.json?v=21" as="fetch" crossorigin>
+<link rel="stylesheet" href="css/app.css?v=21">
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js" charset="utf-8"></script>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#atlas">Beyond Credit Hours</a>
+    <nav class="nav" id="nav">
+      <a href="#atlas" data-view="atlas">Atlases</a>
+      <a href="#requirements" data-view="requirements">Requirements</a>
+      <a href="#jobs" data-view="jobs">Jobs</a>
+      <a href="#about" data-view="about">About</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<!-- ============================================================ US atlas -->
+<section class="view" id="v-atlas">
+  <div class="wrap">
+    <nav class="subnav"><a href="#atlas" data-view="atlas">United States</a><a href="#uk" data-view="uk">United Kingdom</a><a href="#hk" data-view="hk">Hong Kong</a><a href="#au" data-view="au" hidden>Australia</a></nav>
+    <h1 class="title">U.S. construction bachelor’s programs</h1>
+    <p class="lede" id="atlas-lede">Loading the atlas…</p>
+    <div class="filters" id="filters">
+      <div class="fgroup"><span class="flabel">Accreditation</span><div class="chips" id="f-acc"></div></div>
+      <div class="fgroup"><span class="flabel">Program type</span><div class="chips" id="f-group"></div></div>
+      <div class="fgroup"><span class="flabel">Control</span><div class="chips" id="f-control"></div></div>
+      <div class="fgroup"><span class="flabel">State</span><select id="f-state"><option value="">All states</option></select></div>
+      <div class="fgroup grow"><span class="flabel">Search</span><input id="f-q" type="search" placeholder="Institution, program or city"></div>
+      <button class="reset" id="f-reset" type="button">Reset</button>
+    </div>
+    <div class="tiles" id="tiles"></div>
+    <div class="grid2">
+      <div class="panel"><h3>Where they are, and each state’s action on degrees below 120 credits</h3><div id="atlas-map" class="chart tall"></div><div class="maplegend" id="atlas-map-legend"></div></div>
+      <div class="panel"><h3>Published total credits</h3><div id="atlas-hist" class="chart"></div><h3>Published credit blocks</h3><div id="atlas-blocks" class="chart short"></div></div>
+    </div>
+    <div class="panel">
+      <h3>Programs <span class="muted" id="table-count"></span></h3>
+      <div class="tablewrap"><table class="data sortable" id="atlas-table"></table></div>
+      <p class="note">Credits are semester hours as published (quarter-hour catalogs converted at two thirds). State group: the general education minimum that binds the state’s public universities. Each row opens the program’s card with its required courses, its sources and its state’s rule.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ UK atlas -->
+<section class="view" id="v-uk" hidden>
+  <div class="wrap">
+    <nav class="subnav"><a href="#atlas" data-view="atlas">United States</a><a href="#uk" data-view="uk">United Kingdom</a><a href="#hk" data-view="hk">Hong Kong</a><a href="#au" data-view="au" hidden>Australia</a></nav>
+    <h1 class="title">UK construction management honours degrees</h1>
+    <p class="lede" id="uk-lede">Loading the atlas…</p>
+    <div class="filters">
+      <div class="fgroup"><span class="flabel">Country</span><div class="chips" id="uk-country"></div></div>
+      <div class="fgroup"><span class="flabel">Full-time length</span><div class="chips" id="uk-years"></div></div>
+      <div class="fgroup"><span class="flabel">Placement year</span><div class="chips" id="uk-place"></div></div>
+      <div class="fgroup grow"><span class="flabel">Search</span><input id="uk-q" type="search" placeholder="University, campus or program"></div>
+      <button class="reset" id="uk-reset" type="button">Reset</button>
+    </div>
+    <div class="tiles" id="uk-tiles"></div>
+    <div class="grid2">
+      <div class="panel"><h3>Where they are, by full-time length</h3><div id="uk-map" class="chart tall"></div><p class="note" id="uk-map-note"></p></div>
+      <div class="panel"><h3>Annual tuition fee, home and international students</h3><div id="uk-fee" class="chart"></div></div>
+    </div>
+    <div class="panel"><h3>What the credits hold, programs with a full module list</h3><div id="uk-comp" class="chart"></div></div>
+    <div class="panel">
+      <h3>Programs <span class="muted" id="uk-count"></span></h3>
+      <div class="tablewrap"><table class="data sortable" id="uk-atlas-table"></table></div>
+      <p class="note">Programs from the CIOB list of accredited programmes (27 March 2026), read on their course pages and programme specifications; fees as published for the entry year shown in each program’s card. Map points from OpenStreetMap (data © OpenStreetMap contributors, ODbL). Each row opens the program’s card.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ Hong Kong atlas -->
+<section class="view" id="v-hk" hidden>
+  <div class="wrap">
+    <nav class="subnav"><a href="#atlas" data-view="atlas">United States</a><a href="#uk" data-view="uk">United Kingdom</a><a href="#hk" data-view="hk">Hong Kong</a><a href="#au" data-view="au" hidden>Australia</a></nav>
+    <h1 class="title">Hong Kong construction, surveying and building engineering bachelor’s degrees</h1>
+    <p class="lede" id="hk-lede">Loading the atlas…</p>
+    <div class="tiles" id="hk-tiles"></div>
+    <div class="grid2">
+      <div class="panel"><h3>Where they are, by funding</h3><div id="hk-map" class="chart tall"></div><p class="note" id="hk-map-note"></p></div>
+      <div class="panel"><h3>The 2012 reform: where the fourth year went</h3><div id="hk-reform" class="chart short"></div><p class="muted" id="hk-reform-text"></p></div>
+    </div>
+    <div class="panel"><h3>What the credits hold, programs with a course list</h3><div id="hk-comp" class="chart"></div></div>
+    <div class="panel">
+      <h3>Programs</h3>
+      <div class="tablewrap"><table class="data sortable" id="hk-atlas-table"></table></div>
+      <p class="note">Programs read on their programme pages and curriculum documents; general education and major credits as each institution counts them. Map points from OpenStreetMap (data © OpenStreetMap contributors, ODbL). Each row opens the program’s card.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ Australia atlas -->
+<section class="view" id="v-au" hidden>
+  <div class="wrap">
+    <nav class="subnav"><a href="#atlas" data-view="atlas">United States</a><a href="#uk" data-view="uk">United Kingdom</a><a href="#hk" data-view="hk">Hong Kong</a><a href="#au" data-view="au" hidden>Australia</a></nav>
+    <h1 class="title">Australian construction management bachelor’s degrees</h1>
+    <p class="lede" id="au-lede">Loading the atlas…</p>
+    <div class="filters">
+      <div class="fgroup"><span class="flabel">State or territory</span><div class="chips" id="au-state"></div></div>
+      <div class="fgroup"><span class="flabel">Full-time length</span><div class="chips" id="au-years"></div></div>
+      <div class="fgroup grow"><span class="flabel">Search</span><input id="au-q" type="search" placeholder="University, campus or program"></div>
+      <button class="reset" id="au-reset" type="button">Reset</button>
+    </div>
+    <div class="tiles" id="au-tiles"></div>
+    <div class="grid2">
+      <div class="panel"><h3>Where they are, by full-time length</h3><div id="au-map" class="chart tall"></div><p class="note" id="au-map-note"></p></div>
+      <div class="panel"><h3>What sets the length of an Australian degree</h3><ul class="ev" id="au-facts"></ul><h3>Annual fee, domestic and international students</h3><div id="au-fee" class="chart"></div></div>
+    </div>
+    <div class="panel">
+      <h3>Programs <span class="muted" id="au-count"></span></h3>
+      <div class="tablewrap"><table class="data sortable" id="au-atlas-table"></table></div>
+      <p class="note">Programs read on their program pages and handbooks; credit points in each university’s own units, not converted (no page states notional hours). Map points from OpenStreetMap (data © OpenStreetMap contributors, ODbL). Each row opens the program’s card.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ requirements -->
+<section class="view" id="v-requirements" hidden>
+  <div class="wrap">
+    <h1 class="title">Minimum general education credits for public universities</h1>
+    <p class="lede" id="req-lede"></p>
+    <div class="panel">
+      <div class="reqwrap"><div class="tilemap" id="req-map"></div><div class="reqkey" id="req-key"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ job postings -->
+<section class="view" id="v-jobs" hidden>
+  <div class="wrap">
+    <h1 class="title">Job postings read from employers’ career sites</h1>
+    <p class="lede" id="jobs-lede">Loading the postings…</p>
+    <div class="filters">
+      <div class="fgroup"><span class="flabel">Postings</span><div class="chips" id="j-set"></div></div>
+      <div class="fgroup"><span class="flabel">Level</span><div class="chips" id="j-level"></div></div>
+      <div class="fgroup"><span class="flabel">Employer type</span><div class="chips" id="j-type"></div></div>
+      <div class="fgroup"><span class="flabel">Role family</span><select id="j-role"><option value="">All role families</option></select></div>
+      <div class="fgroup"><span class="flabel">State</span><select id="j-state"><option value="">All states</option></select></div>
+      <div class="fgroup grow"><span class="flabel">Search</span><input id="j-q" type="search" placeholder="Job title or employer"></div>
+      <button class="reset" id="j-reset" type="button">Reset</button>
+    </div>
+    <div class="tiles" id="j-tiles"></div>
+    <div class="grid2 even">
+      <div class="panel"><h3>Postings by state of the job</h3><div id="j-map" class="chart tall"></div><p class="note" id="j-map-note"></p></div>
+      <div class="panel"><h3>Role family by level, in the colors of the level filter</h3><div id="j-roles" class="chart tall"></div></div>
+    </div>
+    <div class="panel">
+      <h3>Postings <span class="muted" id="j-count"></span></h3>
+      <div class="tablewrap"><table class="data sortable" id="j-table"></table></div>
+      <div class="pager"><span id="j-pager" class="pagerin"></span><button type="button" class="reset" id="j-csv">Download the postings shown (CSV)</button></div>
+      <p class="note" id="j-note"></p>
+    </div>
+    <div class="panel"><h3>Public lists the employers were drawn from</h3><div class="tablewrap free"><table class="data" id="j-lists"></table></div></div>
+    <div class="panel"><h3>Career-site systems through which the postings were read</h3><div class="tablewrap free"><table class="data" id="j-systems"></table></div>
+      <p class="note">Postings listed: the postings a system showed for the employers read. Read in full: the postings whose pages were fetched. Systems not read: the career sites of the employers on them were not read, so their postings are not in the counts.</p></div>
+  </div>
+</section>
+
+<!-- ============================================================ about -->
+<section class="view" id="v-about" hidden>
+  <div class="wrap">
+    <h1 class="title">About</h1>
+    <div class="panel"><h3>Data sources</h3><div class="tablewrap free"><table class="data" id="sources-table"></table></div></div>
+    <div class="panel"><h3>References</h3><ol class="refs" id="refs-list"></ol></div>
+  </div>
+</section>
+</main>
+
+<div class="card-back" id="card-back" hidden>
+  <aside class="card" id="card" role="dialog" aria-modal="true"></aside>
+</div>
+
+<script src="js/util.js?v=21"></script>
+<script src="js/atlas.js?v=21"></script>
+<script src="js/world.js?v=21"></script>
+<script src="js/study.js?v=21"></script>
+<script src="js/jobs.js?v=21"></script>
+<script src="js/app.js?v=21"></script>
+</body>
+</html>
